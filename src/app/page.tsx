@@ -1,32 +1,13 @@
 import DeveloperCard from 'components/DeveloperCards/DeveloperCard';
-import Link from 'next/link';
 import styles from './MainPage.module.css';
+import Header from 'components/Header/Header';
 
 export default function MainPageMock() {
   const isLoggedIn = false;
 
   return (
     <div>
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '1rem',
-        }}
-      >
-        <h1>REST Client</h1>
-        <div>
-          {isLoggedIn ? (
-            <Link href="/rest-client">Main Page</Link>
-          ) : (
-            <>
-              <Link href="/sign-in">Sign In</Link>
-              {' | '}
-              <Link href="/sign-up">Sign Up</Link>
-            </>
-          )}
-        </div>
-      </header>
+      <Header isLoggedIn={isLoggedIn} />
 
       <main className={styles.main}>
         <h2 className={styles.title}>Welcome to the REST Client App</h2>
