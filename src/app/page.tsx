@@ -1,9 +1,12 @@
+'use client';
+
 import DeveloperCard from 'components/DeveloperCards/DeveloperCard';
 import styles from './MainPage.module.css';
 import Header from 'components/Header/Header';
+import { useAuth } from 'hooks/useAuth';
 
 export default function MainPageMock() {
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
 
   return (
     <div>
