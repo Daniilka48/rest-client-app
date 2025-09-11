@@ -1,0 +1,38 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(70, 157, 250, 0.5);
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.sticky {
+  background: rgba(0, 123, 255, 0.9);
+}
+
+.headerContent {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  transition: padding 0.3s ease-in-out;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.navLink {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #0056b3;
+}
