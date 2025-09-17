@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Login = () => {
-  const router = useRouter(); // Initialize Next.js router
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       const result = await signIn('credentials', {
-        redirect: false, // Manual control of flow
+        redirect: false,
         email,
         password,
       });
@@ -29,7 +29,7 @@ const Login = () => {
         setError(result.error);
       } else {
         alert('You have successfully logged in!');
-        router.push('/dashboard');
+        router.push('/');
       }
     } catch (err) {
       setError(getErrorMessage(err));

@@ -1,5 +1,4 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import { DefaultSession } from 'next-auth';
 
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -45,10 +44,9 @@ export const authOptions: NextAuthOptions = {
           user.password
         );
         if (!isPasswordValid) {
-          throw new Error('Invalid password'); // Redirects to the error page
+          throw new Error('Invalid password');
         }
 
-        // Return user object if authentication is successful
         return { id: user.id.toString(), email: user.email, name: user.name };
       },
     }),
