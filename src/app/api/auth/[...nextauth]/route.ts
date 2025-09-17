@@ -1,5 +1,4 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaClient } from '@prisma/client';
@@ -36,7 +35,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user) {
-          throw new Error('User not found');
+          throw new Error('User not found. Please sign up.');
         }
 
         const isPasswordValid = await bcrypt.compare(

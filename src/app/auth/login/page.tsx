@@ -27,6 +27,7 @@ const Login = () => {
 
       if (result?.error) {
         setError(result.error);
+        router.push(`/signup`);
       } else {
         alert('You have successfully logged in!');
         router.push('/');
