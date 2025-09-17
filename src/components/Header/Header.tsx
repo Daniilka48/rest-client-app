@@ -26,7 +26,7 @@ const Header = () => {
         <nav>
           {isLoggedIn ? (
             <>
-              <Link href="/dashboard" className={styles.navLink}>
+              <Link href="/" className={styles.navLink}>
                 Main Page
               </Link>
               {' | '}
