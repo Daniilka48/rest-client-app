@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { decodeBase64Unicode, encodeBase64Unicode } from '@/lib/base64';
+import { generateCodeSnippets } from '@/lib/codegen';
 
 type HeaderItem = { key: string; value: string };
 
@@ -17,6 +18,9 @@ export default function ClientRestClient({ routeParams }: Props) {
   const [responseStatus, setResponseStatus] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [snippets, setSnippets] = useState<Record<string, string>>({});
+  const [activeTab, setActiveTab] = useState<string>('curl-bash');
 
   useEffect(() => {
     if (!routeParams.length) return;
@@ -88,6 +92,14 @@ export default function ClientRestClient({ routeParams }: Props) {
         : newRoute;
 
       window.history.replaceState(null, '', routeWithQuery);
+
+      const codeResults = await generateCodeSnippets(
+        url,
+        method,
+        headers,
+        body
+      );
+      setSnippets(codeResults);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
@@ -198,24 +210,41 @@ export default function ClientRestClient({ routeParams }: Props) {
       </div>
 
       <div style={{ marginTop: 18 }}>
-        <strong>Code</strong>
-        <pre
-          style={{
-            whiteSpace: 'pre-wrap',
-            marginTop: 8,
-            background: '#f7f7f7',
-            padding: 12,
-            borderRadius: 6,
-          }}
-        >
-          {`fetch("${url}", {
-  method: "${method}",
-  headers: {
-${headers.map((h) => `    "${h.key}": "${h.value}"`).join(',\n')}
-  },
-  body: ${body ? JSON.stringify(body, null, 2) : 'undefined'}
-});`}
-        </pre>
+        <strong>Generated Code</strong>
+        {!url ? (
+          <div style={{ marginTop: 8, color: 'red' }}>
+            Not enough details to generate code
+          </div>
+        ) : (
+          <>
+            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+              {Object.keys(snippets).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key)}
+                  style={{
+                    padding: '6px 12px',
+                    borderRadius: 6,
+                    background: activeTab === key ? '#ddd' : '#f7f7f7',
+                  }}
+                >
+                  {key}
+                </button>
+              ))}
+            </div>
+            <pre
+              style={{
+                whiteSpace: 'pre-wrap',
+                marginTop: 8,
+                background: '#f7f7f7',
+                padding: 12,
+                borderRadius: 6,
+              }}
+            >
+              {snippets[activeTab] || 'Generating...'}
+            </pre>
+          </>
+        )}
       </div>
     </div>
   );
