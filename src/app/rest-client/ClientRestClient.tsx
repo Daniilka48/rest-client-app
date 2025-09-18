@@ -1,49 +1,39 @@
 'use client';
-
 import React, { useEffect, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { decodeBase64Unicode, encodeBase64Unicode } from '@/lib/base64';
 
 type HeaderItem = { key: string; value: string };
 
-export default function ClientRestClient() {
-  const [method, setMethod] = useState<string>('GET');
-  const [url, setUrl] = useState<string>('');
-  const [body, setBody] = useState<string>('');
+interface Props {
+  routeParams: string[];
+}
+
+export default function ClientRestClient({ routeParams }: Props) {
+  const [method, setMethod] = useState('GET');
+  const [url, setUrl] = useState('');
+  const [body, setBody] = useState('');
   const [headers, setHeaders] = useState<HeaderItem[]>([]);
   const [responseText, setResponseText] = useState<string | null>(null);
   const [responseStatus, setResponseStatus] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  useEffect(() => {
+    if (!routeParams.length) return;
+    const [m, urlB64, bodyB64] = routeParams;
+    if (m) setMethod(m.toUpperCase());
+    if (urlB64) setUrl(decodeBase64Unicode(urlB64));
+    if (bodyB64) setBody(decodeBase64Unicode(bodyB64));
+  }, [routeParams]);
 
   useEffect(() => {
-    if (!pathname) return;
-    const parts = pathname.split('/').filter(Boolean);
-    if (parts.length >= 2 && parts[0] === 'rest-client') {
-      const m = parts[1];
-      setMethod(m.toUpperCase());
-      if (parts[2]) {
-        const decodedUrl = decodeBase64Unicode(parts[2]);
-        setUrl(decodedUrl);
-      }
-      if (parts[3]) {
-        const decodedBody = decodeBase64Unicode(parts[3]);
-        setBody(decodedBody);
-      }
+    const searchParams = new URLSearchParams(window.location.search);
+    const hdrs: HeaderItem[] = [];
+    for (const [k, v] of searchParams.entries()) {
+      hdrs.push({ key: k, value: decodeURIComponent(v) });
     }
-
-    if (searchParams) {
-      const hdrs: HeaderItem[] = [];
-      for (const [k, v] of Array.from(searchParams.entries())) {
-        hdrs.push({ key: k, value: decodeURIComponent(v) });
-      }
-      if (hdrs.length) setHeaders(hdrs);
-    }
-  }, [pathname, searchParams]);
+    if (hdrs.length) setHeaders(hdrs);
+  }, []);
 
   const addHeader = () => setHeaders((s) => [...s, { key: '', value: '' }]);
   const updateHeader = (idx: number, key: string, value: string) =>
@@ -61,8 +51,6 @@ export default function ClientRestClient() {
   const sendRequest = async () => {
     setLoading(true);
     setError(null);
-    setResponseText(null);
-    setResponseStatus(null);
 
     try {
       const headersObj: Record<string, string> = {};
@@ -76,6 +64,15 @@ export default function ClientRestClient() {
         headers: headersObj,
         body: body || undefined,
       };
+      const res = await fetch('/api/proxy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const text = await res.text().catch(() => '');
+      setResponseStatus(res.status);
+      setResponseText(text);
 
       const urlB64 = encodeBase64Unicode(url);
       const bodyB64 = body ? encodeBase64Unicode(body) : undefined;
@@ -89,23 +86,12 @@ export default function ClientRestClient() {
       const routeWithQuery = qs.toString()
         ? `${newRoute}?${qs.toString()}`
         : newRoute;
-      router.replace(routeWithQuery);
 
-      const res = await fetch('/api/proxy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const text = await res.text().catch(() => '');
-      setResponseStatus(res.status);
-      setResponseText(text);
+      window.history.replaceState(null, '', routeWithQuery);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError(String(err));
-      }
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -130,14 +116,12 @@ export default function ClientRestClient() {
             </option>
           ))}
         </select>
-
         <input
           placeholder="https://api.example.com/resource"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           style={{ flex: 1, padding: 8 }}
         />
-
         <button
           onClick={sendRequest}
           disabled={loading}
@@ -174,7 +158,6 @@ export default function ClientRestClient() {
               <button onClick={() => removeHeader(i)}>Remove</button>
             </div>
           ))}
-
           <button onClick={addHeader} style={{ marginTop: 8 }}>
             + Add Header
           </button>
