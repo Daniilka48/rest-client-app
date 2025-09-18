@@ -196,6 +196,27 @@ export default function ClientRestClient({ routeParams }: Props) {
           </pre>
         </div>
       </div>
+
+      <div style={{ marginTop: 18 }}>
+        <strong>Code</strong>
+        <pre
+          style={{
+            whiteSpace: 'pre-wrap',
+            marginTop: 8,
+            background: '#f7f7f7',
+            padding: 12,
+            borderRadius: 6,
+          }}
+        >
+          {`fetch("${url}", {
+  method: "${method}",
+  headers: {
+${headers.map((h) => `    "${h.key}": "${h.value}"`).join(',\n')}
+  },
+  body: ${body ? JSON.stringify(body, null, 2) : 'undefined'}
+});`}
+        </pre>
+      </div>
     </div>
   );
 }
