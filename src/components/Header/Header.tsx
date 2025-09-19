@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import styles from './Header.module.css';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -33,7 +34,7 @@ const Header = () => {
               <Link href="/rest-client" className={styles.navLink}>
                 REST Client
               </Link>
-
+              <LanguageSwitcher />
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
                 className={styles.navLink}
