@@ -2,10 +2,40 @@
   "welcomeMessage": "Добро пожаловать в приложение REST Client",
   "projectName": "Проект: REST Client",
   "courseInfo": "Курс: Этап 3 React",
-  "greeting": "С возвращением, {{name}}!",
+  "greeting": "С возвращением,",
   "developersTitle": "Разработчики",
-  "frontendDeveloper": "Frontend Разработчик",
-  "developerOneBio": "Выпускник Липецкого государственного технического университета, специализация — экономика и управление на предприятиях.",
-  "developerTwoBio": "Еще один талантливый фронтенд-разработчик.",
-  "loading": "Загрузка..."
+  "developers": {
+    "daniilTerekhin": {
+      "name": "Даниил Терехин",
+      "role": "Фронтенд разработчик",
+      "bio": "Выпускник Липецкого государственного технического университета, специализация — экономика и управление на предприятиях."
+    },
+    "guliaIsaeva": {
+      "name": "Гулия Исаева Çöloğlu",
+      "role": "Фронтенд разработчик",
+      "bio": "Выпускница Гамбургского университета, специализация — Performance Studies (Master of Art)"
+    }
+  },
+  "loading": "Загрузка...",
+  "navigation": {
+    "mainPage": "Главная страница",
+    "restClient": "REST Клиент",
+    "logout": "Выйти",
+    "signIn": "Вход",
+    "signUp": "Регистрация"
+  },
+  "login": {
+    "title": "Вход",
+    "emailPlaceholder": "Эл. почта",
+    "passwordPlaceholder": "Пароль",
+    "submitButton": "Войти",
+    "successMessage": "Вы успешно вошли!",
+    "redirectMessage": "Перенаправление на регистрацию...",
+    "error": {
+      "default": "Что-то пошло не так.",
+      "invalidCredentials": "Неверный адрес эл. почты или пароль.",
+      "userNotFound": "Пользователь не найден.",
+      "missingFields": "Все поля обязательны для заполнения."
+    }
+  }
 }

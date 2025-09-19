@@ -27,12 +27,53 @@
 }
 
 .navLink {
-  margin-left: 1rem;
+  display: inline-block;
+  padding:  6px;
   text-decoration: none;
-  color: #000;
-  transition: color 0.3s ease;
+  color: #333;
+  background-color: #ddd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navLink:hover {
-  color: #0056b3;
+  background-color: #bbb;
+  color: #000;
+}
+
+.navLink:focus {
+  outline: 2px solid #888; 
+}
+.navLinks {
+  display: flex;
+  margin: 0.5rem 1rem;
+  gap: 1.5rem;
+}
+.logout {
+    display: inline-block;
+  padding:  6px;
+  text-decoration: none;
+  color: #333;
+  background-color: #ddd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logout:hover {
+ background-color: #bbb;
+  color: #000;
+}
+
+.logout:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.logout:active {
+  background-color: crimson;
 }

@@ -1,0 +1,23 @@
+.langBox {
+  display: flex;
+  gap: 10px;
+  margin: 0.5rem 1rem;
+}
+.languageButton {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  background-color: #ddd;
+  color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.languageButton:hover {
+  background-color: #bbb;
+}
+
+.activeLanguage {
+  background-color: green;
+  color: white;
+}

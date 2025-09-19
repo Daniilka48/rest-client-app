@@ -3,10 +3,12 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
-import styles from './Header.module.css';
+import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import styles from './Header.module.css';
 
 const Header = () => {
+  const { t } = useTranslation('common');
   const [isSticky, setIsSticky] = useState(false);
   const { data: session } = useSession();
   const isLoggedIn = !!session;
@@ -23,33 +25,34 @@ const Header = () => {
     <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles.headerContent}>
         <h1 className={styles.logo}>REST Client</h1>
-
         <nav>
           {isLoggedIn ? (
-            <>
+            <div>
               <Link href="/" className={styles.navLink}>
-                Main Page
+                {t('navigation.mainPage')}
               </Link>
               {' | '}
               <Link href="/rest-client" className={styles.navLink}>
-                REST Client
+                {t('navigation.restClient')}
               </Link>
-              <LanguageSwitcher />
-              <button
-                onClick={() => signOut({ callbackUrl: '/' })}
-                className={styles.navLink}
-              >
-                Logout
-              </button>
-            </>
+              <div className={styles.navLinks}>
+                <LanguageSwitcher />
+                <button
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                  className={styles.logout}
+                >
+                  {t('navigation.logout')}
+                </button>
+              </div>
+            </div>
           ) : (
             <>
               <Link href="/auth/login" className={styles.navLink}>
-                Sign In
+                {t('navigation.signIn')}
               </Link>
               {' | '}
               <Link href="/signup" className={styles.navLink}>
-                Sign Up
+                {t('navigation.signUp')}
               </Link>
             </>
           )}

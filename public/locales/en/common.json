@@ -2,10 +2,40 @@
   "welcomeMessage": "Welcome to the REST Client App",
   "projectName": "Project: REST Client",
   "courseInfo": "Course: Stage 3 React",
-  "greeting": "Welcome Back, {{name}}!",
+  "greeting": "Welcome Back,",
   "developersTitle": "Developers",
-  "frontendDeveloper": "Frontend Developer",
-  "developerOneBio": "Graduate of Lipetsk State Technical University, majoring in Economics and Management at Enterprises.",
-  "developerTwoBio": "Another talented frontend developer.",
-  "loading": "Loading..."
+  "developers": {
+    "daniilTerekhin": {
+      "name": "Daniil Terekhin",
+      "role": "Frontend Developer",
+      "bio": "Graduate of Lipetsk State Technical University, majoring in Economics and Management at Enterprises."
+    },
+    "guliaIsaeva": {
+      "name": "Gulia Isaeva Çöloğlu",
+      "role": "Frontend Developer",
+      "bio": "Graduate of Hamburg University of Germany, specializing in Performance Studies (Master of Art)."
+    }
+  },
+  "loading": "Loading...",
+  "navigation": {
+    "mainPage": "Main Page",
+    "restClient": "REST Client",
+    "logout": "Logout",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "login": {
+    "title": "Login",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "submitButton": "Login",
+    "successMessage": "You have successfully logged in!",
+    "redirectMessage": "Redirecting to Sign Up...",
+    "error": {
+      "default": "Something went wrong.",
+      "invalidCredentials": "Invalid email or password.",
+      "userNotFound": "User not found.",
+      "missingFields": "All fields are required."
+    }
+  }
 }

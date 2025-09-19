@@ -33,6 +33,8 @@ const Login = () => {
       }
     } catch (err) {
       setError(getErrorMessage(err));
+              router.push('/signup');
+
     }
   };
 
