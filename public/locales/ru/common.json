@@ -31,10 +31,27 @@
     "submitButton": "Войти",
     "successMessage": "Вы успешно вошли!",
     "redirectMessage": "Перенаправление на регистрацию...",
+    "noAccount": "Нет аккаунта?",
     "error": {
       "default": "Что-то пошло не так.",
       "invalidCredentials": "Неверный адрес эл. почты или пароль.",
       "userNotFound": "Пользователь не найден.",
+      "missingFields": "Все поля обязательны для заполнения."
+    }
+  },
+  "signup": {
+    "title": "Регистрация",
+    "namePlaceholder": "Имя",
+    "emailPlaceholder": "Эл. почта",
+    "passwordPlaceholder": "Пароль",
+    "submitButton": "Зарегистрироваться",
+    "successMessage": "Аккаунт успешно создан! Перенаправление на вход...",
+    "redirectMessage": "Перенаправление на вход...",
+    "hasAccount": "Уже есть аккаунт?",
+    "error": {
+      "default": "Что-то пошло не так.",
+      "registrationFailed": "Ошибка регистрации.",
+      "userExists": "Пользователь уже существует.",
       "missingFields": "Все поля обязательны для заполнения."
     }
   }

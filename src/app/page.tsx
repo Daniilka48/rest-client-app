@@ -8,18 +8,19 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../i18';
 export default function MainPageMock() {
-  const { t } = useTranslation('common');
+  const { t, ready } = useTranslation('common');
 
   const { data: session, status } = useSession();
   const router = useRouter();
+
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/auth/login');
     }
   }, [router, status]);
 
-  if (status === 'loading') {
-    return <p>{t('loading')}</p>;
+  if (status === 'loading' || !ready) {
+    return <p>Loading...</p>;
   }
 
   return (

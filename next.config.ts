@@ -1,10 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  i18n: {
-    locales: ['en', 'ru'],
-    defaultLocale: 'en',
-  },
+  // Client-side i18n is configured in src/i18.ts
 };
 
 export default nextConfig;

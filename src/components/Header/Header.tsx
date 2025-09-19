@@ -8,12 +8,14 @@ import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import styles from './Header.module.css';
 
 const Header = () => {
-  const { t } = useTranslation('common');
+  const { t, ready } = useTranslation('common');
   const [isSticky, setIsSticky] = useState(false);
-  const { data: session } = useSession();
+  const [isMounted, setIsMounted] = useState(false);
+  const { data: session, status } = useSession();
   const isLoggedIn = !!session;
 
   useEffect(() => {
+    setIsMounted(true);
     const handleScroll = () => {
       setIsSticky(window.scrollY > 50);
     };
@@ -21,39 +23,78 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Show loading state or default state until mounted and translations ready to avoid hydration mismatch
+  if (!isMounted || status === 'loading' || !ready) {
+    return (
+      <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
+        <div className={styles.headerContent}>
+          <Link href="/" className={styles.logoLink}>
+            <h1 className={styles.logo}>REST Client</h1>
+          </Link>
+          <nav className={styles.navigation}>
+            <div className={styles.authLinks}>
+              <Link href="/auth/login" className={styles.authButton}>
+                Sign In
+              </Link>
+              <Link
+                href="/signup"
+                className={`${styles.authButton} ${styles.signUpButton}`}
+              >
+                Sign Up
+              </Link>
+            </div>
+            <LanguageSwitcher />
+          </nav>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles.headerContent}>
-        <h1 className={styles.logo}>REST Client</h1>
-        <nav>
+        <Link href="/" className={styles.logoLink}>
+          <h1 className={styles.logo}>REST Client</h1>
+        </Link>
+        <nav className={styles.navigation}>
           {isLoggedIn ? (
-            <div>
-              <Link href="/" className={styles.navLink}>
-                {t('navigation.mainPage')}
-              </Link>
-              {' | '}
-              <Link href="/rest-client" className={styles.navLink}>
-                {t('navigation.restClient')}
-              </Link>
-              <div className={styles.navLinks}>
+            <>
+              <div className={styles.mainNavLinks}>
+                <Link href="/" className={styles.navLink}>
+                  {t('navigation.mainPage')}
+                </Link>
+                <Link href="/rest-client" className={styles.navLink}>
+                  {t('navigation.restClient')}
+                </Link>
+              </div>
+              <div className={styles.userActions}>
                 <LanguageSwitcher />
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
-                  className={styles.logout}
+                  className={styles.logoutButton}
+                  title={t('navigation.logout')}
                 >
-                  {t('navigation.logout')}
+                  <span className={styles.logoutIcon}>⏻</span>
+                  <span className={styles.logoutText}>
+                    {t('navigation.logout')}
+                  </span>
                 </button>
               </div>
-            </div>
+            </>
           ) : (
             <>
-              <Link href="/auth/login" className={styles.navLink}>
-                {t('navigation.signIn')}
-              </Link>
-              {' | '}
-              <Link href="/signup" className={styles.navLink}>
-                {t('navigation.signUp')}
-              </Link>
+              <div className={styles.authLinks}>
+                <Link href="/auth/login" className={styles.authButton}>
+                  {t('navigation.signIn')}
+                </Link>
+                <Link
+                  href="/signup"
+                  className={`${styles.authButton} ${styles.signUpButton}`}
+                >
+                  {t('navigation.signUp')}
+                </Link>
+              </div>
+              <LanguageSwitcher />
             </>
           )}
         </nav>

@@ -1,11 +1,12 @@
 .about-card {
-  max-width: 700px;
-  margin: 1rem auto;
-  padding: 2rem;
+  max-width: 600px;
+  margin: 1rem;
+  padding: 1.5rem;
   text-align: center;
   background-color: var(--bg-color);
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+  flex: 1;
 }
 
 .about-photo {

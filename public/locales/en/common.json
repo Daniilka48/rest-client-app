@@ -31,10 +31,27 @@
     "submitButton": "Login",
     "successMessage": "You have successfully logged in!",
     "redirectMessage": "Redirecting to Sign Up...",
+    "noAccount": "Don't have an account?",
     "error": {
       "default": "Something went wrong.",
       "invalidCredentials": "Invalid email or password.",
       "userNotFound": "User not found.",
+      "missingFields": "All fields are required."
+    }
+  },
+  "signup": {
+    "title": "Sign Up",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "submitButton": "Sign Up",
+    "successMessage": "Account created successfully! Redirecting to login...",
+    "redirectMessage": "Redirecting to Login...",
+    "hasAccount": "Already have an account?",
+    "error": {
+      "default": "Something went wrong.",
+      "registrationFailed": "Failed to register.",
+      "userExists": "User already exists.",
       "missingFields": "All fields are required."
     }
   }

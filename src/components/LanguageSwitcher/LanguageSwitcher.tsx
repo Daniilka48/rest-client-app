@@ -1,17 +1,58 @@
 'use client';
 
-import i18n from 'i18next';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './LanguageSwitcher.module.css';
+
 export default function LanguageSwitcher() {
+  const { i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState('en'); // Default to 'en' to match SSR
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    setCurrentLang(i18n.language || 'en');
+
+    const handleLanguageChanged = (lng: string) => {
+      setCurrentLang(lng);
+    };
+
+    i18n.on('languageChanged', handleLanguageChanged);
+
+    return () => {
+      i18n.off('languageChanged', handleLanguageChanged);
+    };
+  }, [i18n]);
+
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
   };
+
+  // Don't render active states until mounted to avoid hydration mismatch
+  if (!isMounted) {
+    return (
+      <div className={styles.langBox}>
+        <button
+          className={styles.languageButton}
+          onClick={() => changeLanguage('en')}
+        >
+          En
+        </button>
+        <button
+          className={styles.languageButton}
+          onClick={() => changeLanguage('ru')}
+        >
+          Ru
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.langBox}>
       <button
         className={`${styles.languageButton} ${
-          i18n.language === 'en' ? styles.activeLanguage : ''
+          currentLang === 'en' ? styles.activeLanguage : ''
         }`}
         onClick={() => changeLanguage('en')}
       >
@@ -19,7 +60,7 @@ export default function LanguageSwitcher() {
       </button>
       <button
         className={`${styles.languageButton} ${
-          i18n.language === 'ru' ? styles.activeLanguage : ''
+          currentLang === 'ru' ? styles.activeLanguage : ''
         }`}
         onClick={() => changeLanguage('ru')}
       >
