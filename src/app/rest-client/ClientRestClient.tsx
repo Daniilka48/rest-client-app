@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { decodeBase64Unicode, encodeBase64Unicode } from '@/lib/base64';
 import { generateCodeSnippets } from '@/lib/codegen';
+import { useSession } from 'next-auth/react';
 
 type HeaderItem = { key: string; value: string };
 
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export default function ClientRestClient({ routeParams }: Props) {
+  const { data: session } = useSession();
+
   const [method, setMethod] = useState('GET');
   const [url, setUrl] = useState('');
   const [body, setBody] = useState('');
@@ -68,9 +71,13 @@ export default function ClientRestClient({ routeParams }: Props) {
         headers: headersObj,
         body: body || undefined,
       };
+
       const res = await fetch('/api/proxy', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.user?.id ? { 'x-user-id': session.user.id } : {}),
+        },
         body: JSON.stringify(payload),
       });
 
