@@ -6,6 +6,6 @@ const HistorySection = dynamic(() => import('./HistorySection'), {
   ssr: false,
 });
 
-export default function HistorySectionWrapper({ userId }: { userId: string }) {
-  return <HistorySection userId={userId} />;
+export default function HistorySectionWrapper() {
+  return <HistorySection />;
 }

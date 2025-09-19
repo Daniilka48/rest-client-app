@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
 import { encodeBase64Unicode } from '@/lib/base64';
-
-interface Props {
-  userId: string;
-}
+import { useSession } from 'next-auth/react';
 
 interface HistoryItem {
   id: number;
@@ -17,17 +14,19 @@ interface HistoryItem {
   created_at: string;
 }
 
-export default function HistorySection({ userId }: Props) {
+export default function HistorySection() {
+  const session = useSession();
+  const userId = session?.data?.user.id;
   const [history, setHistory] = useState<HistoryItem[]>([]);
-
   useEffect(() => {
     async function fetchHistory() {
-      const { data } = await supabase
-        .from('request_history')
+      const { data, error } = await supabase
+        .from('rest')
         .select('id, method, url, status_code, latency_ms, created_at')
         .eq('user_id', userId)
         .order('created_at', { ascending: false });
-      setHistory(data || []);
+      if (!error) setHistory(data || []);
+      console.log(data, error, 'E', userId);
     }
     fetchHistory();
   }, [userId]);

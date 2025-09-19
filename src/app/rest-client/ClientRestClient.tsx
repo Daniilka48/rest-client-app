@@ -12,6 +12,7 @@ interface Props {
 
 export default function ClientRestClient({ routeParams }: Props) {
   const { data: session } = useSession();
+  console.log(session);
 
   const [method, setMethod] = useState('GET');
   const [url, setUrl] = useState('');
@@ -76,7 +77,7 @@ export default function ClientRestClient({ routeParams }: Props) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(session?.user?.id ? { 'x-user-id': session.user.id } : {}),
+          ...(session?.user?.id && { 'x-user-id': session.user.id }),
         },
         body: JSON.stringify(payload),
       });

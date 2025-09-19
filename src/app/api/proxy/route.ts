@@ -1,8 +1,21 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabaseClient';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://brjjybqngljiagmfukfa.supabase.co';
+const supabaseKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyamp5YnFuZ2xqaWFnbWZ1a2ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzMTAyNjcsImV4cCI6MjA3Mzg4NjI2N30.vDkS5TUOO9V_y9pjMySKx74orts5WPt6w5ecOxQjnBU';
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
+// const supabaseAdmin = createClient(
+//   process.env.NEXT_PUBLIC_SUPABASE_URL,
+//   process.env.SUPABASE_SERVICE_ROLE_KEY
+// );
 
 export async function POST(req: Request) {
   try {
+    const userId = req.headers.get('x-user-id');
+
+    console.log('User ID:', userId);
     const payload = await req.json();
     const { method, url, headers = {}, body } = payload;
 
@@ -56,10 +69,10 @@ export async function POST(req: Request) {
       : 0;
 
     try {
-      const userId = req.headers.get('x-user-id');
-      console.log('userId from header:', userId);
+      // const userId = payload.user_id;
       if (userId) {
-        await supabase.from('request_history').insert([
+        console.log(payload, userId);
+        const { data, error } = await supabase.from('rest').insert([
           {
             user_id: userId,
             method,
@@ -73,6 +86,8 @@ export async function POST(req: Request) {
             error: errorMsg,
           },
         ]);
+        if (error) console.log('Error', error);
+        console.log(data);
       }
     } catch (dbErr) {
       console.error('Failed to save request history', dbErr);
