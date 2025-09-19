@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import '../i18';
 
 export default function MainPageMock() {
   const { data: session, status } = useSession();
@@ -25,10 +26,9 @@ export default function MainPageMock() {
     <div>
       <main className={styles.main}>
         {/* <h2 className={styles.title}>Welcome to the REST Client App</h2> */}
-        <h2 className={styles.title}>{t('welcome')}</h2>
-        <p className={styles.info}>Project: REST Client</p>
-        <p className={styles.info}>Course: Stage 3 React</p>
-
+        <h2 className={styles.title}>{t('welcomeMessage')}</h2>
+        <p className={styles.info}>{t('projectName')}</p>
+        <p className={styles.info}>{t('courseInfo')}</p>
         <p className={styles.welcome}>
           Welcome Back, {session?.user?.name || 'User'}!
         </p>

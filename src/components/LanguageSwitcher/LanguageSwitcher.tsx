@@ -1,23 +1,16 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import i18n from 'i18next';
 
 export default function LanguageSwitcher() {
-  const router = useRouter();
-  const { pathname, query, asPath, locale } = router;
-
-  const changeLanguage = (newLocale: string) => {
-    router.push({ pathname, query }, asPath, { locale: newLocale });
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
   };
 
   return (
     <div>
-      <button onClick={() => changeLanguage('en')} disabled={locale === 'en'}>
-        English
-      </button>
-      <button onClick={() => changeLanguage('ru')} disabled={locale === 'ru'}>
-        Русский
-      </button>
+      <button onClick={() => changeLanguage('en')}>English</button>
+      <button onClick={() => changeLanguage('ru')}>Русский</button>
     </div>
   );
 }

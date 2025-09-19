@@ -1,4 +1,11 @@
 {
-  "greeting": "Hello",
-  "welcome": "Welcome to our application!"
+  "welcomeMessage": "Welcome to the REST Client App",
+  "projectName": "Project: REST Client",
+  "courseInfo": "Course: Stage 3 React",
+  "greeting": "Welcome Back, {{name}}!",
+  "developersTitle": "Developers",
+  "frontendDeveloper": "Frontend Developer",
+  "developerOneBio": "Graduate of Lipetsk State Technical University, majoring in Economics and Management at Enterprises.",
+  "developerTwoBio": "Another talented frontend developer.",
+  "loading": "Loading..."
 }

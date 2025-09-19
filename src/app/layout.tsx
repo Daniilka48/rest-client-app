@@ -1,6 +1,7 @@
 import ClientProviderWrapper from './ClientProviderWrapper';
 import type { Metadata } from 'next';
 import './globals.css';
+import '../i18';
 
 export const metadata: Metadata = {
   title: 'REST Client',
@@ -10,11 +11,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   return (
-    <html lang="en">
+    <html lang={params.locale || 'en'}>
       <body>
         <ClientProviderWrapper>{children}</ClientProviderWrapper>
       </body>

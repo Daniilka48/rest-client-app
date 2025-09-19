@@ -17,6 +17,7 @@
     "@prisma/client": "^6.16.1",
     "bcryptjs": "^3.0.2",
     "i18next": "^25.5.2",
+    "i18next-http-backend": "^3.0.2",
     "next": "15.5.2",
     "next-auth": "^4.24.11",
     "next-i18next": "^15.4.2",

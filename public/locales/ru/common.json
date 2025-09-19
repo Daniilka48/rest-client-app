@@ -1,4 +1,11 @@
 {
-  "greeting": "Здравствуйте",
-  "welcome": "Добро пожаловать в наше приложение!"
+  "welcomeMessage": "Добро пожаловать в приложение REST Client",
+  "projectName": "Проект: REST Client",
+  "courseInfo": "Курс: Этап 3 React",
+  "greeting": "С возвращением, {{name}}!",
+  "developersTitle": "Разработчики",
+  "frontendDeveloper": "Frontend Разработчик",
+  "developerOneBio": "Выпускник Липецкого государственного технического университета, специализация — экономика и управление на предприятиях.",
+  "developerTwoBio": "Еще один талантливый фронтенд-разработчик.",
+  "loading": "Загрузка..."
 }
