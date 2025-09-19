@@ -30,6 +30,9 @@ const Header = () => {
                 Main Page
               </Link>
               {' | '}
+              <Link href="/rest-client" className={styles.navLink}>
+                REST Client
+              </Link>
 
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
