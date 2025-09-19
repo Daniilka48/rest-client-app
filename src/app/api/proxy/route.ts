@@ -1,15 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = 'https://brjjybqngljiagmfukfa.supabase.co';
-const supabaseKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyamp5YnFuZ2xqaWFnbWZ1a2ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzMTAyNjcsImV4cCI6MjA3Mzg4NjI2N30.vDkS5TUOO9V_y9pjMySKx74orts5WPt6w5ecOxQjnBU';
-
-export const supabase = createClient(supabaseUrl, supabaseKey);
-// const supabaseAdmin = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL,
-//   process.env.SUPABASE_SERVICE_ROLE_KEY
-// );
+import { supabase } from '@/lib/supabaseClient';
 
 export async function POST(req: Request) {
   try {
@@ -69,7 +59,6 @@ export async function POST(req: Request) {
       : 0;
 
     try {
-      // const userId = payload.user_id;
       if (userId) {
         console.log(payload, userId);
         const { data, error } = await supabase.from('rest').insert([

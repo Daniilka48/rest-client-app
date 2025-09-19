@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
 import { encodeBase64Unicode } from '@/lib/base64';
 import { useSession } from 'next-auth/react';
+import './HistorySection.css';
 
 interface HistoryItem {
   id: number;
@@ -12,6 +13,9 @@ interface HistoryItem {
   status_code: number;
   latency_ms: number;
   created_at: string;
+  request_size: number | null;
+  response_size: number | null;
+  error: string | null;
 }
 
 export default function HistorySection() {
@@ -22,11 +26,12 @@ export default function HistorySection() {
     async function fetchHistory() {
       const { data, error } = await supabase
         .from('rest')
-        .select('id, method, url, status_code, latency_ms, created_at')
+        .select(
+          'id, method, url, status_code, latency_ms, created_at, request_size, response_size, error'
+        )
         .eq('user_id', userId)
         .order('created_at', { ascending: false });
       if (!error) setHistory(data || []);
-      console.log(data, error, 'E', userId);
     }
     fetchHistory();
   }, [userId]);
@@ -50,8 +55,35 @@ export default function HistorySection() {
             <Link
               href={`/rest-client/${item.method}/${encodeBase64Unicode(item.url)}`}
             >
-              [{item.method} {item.url}] Status: {item.status_code},{' '}
-              {item.latency_ms}ms
+              <div>
+                <strong>Endpoint:</strong> {item.url}
+              </div>
+              <div>
+                <strong>Method:</strong> {item.method}
+              </div>
+              <div>
+                <strong>Status Code:</strong> {item.status_code}
+              </div>
+              <div>
+                <strong>Latency:</strong> {item.latency_ms} ms
+              </div>
+              <div>
+                <strong>Timestamp:</strong>{' '}
+                {item.created_at
+                  ? new Date(item.created_at).toLocaleString()
+                  : '—'}
+              </div>
+              <div>
+                <strong>Request Size:</strong> {item.request_size || 0} bytes
+              </div>
+              <div>
+                <strong>Response Size:</strong> {item.response_size || 0} bytes
+              </div>
+              {item.error && (
+                <div>
+                  <strong>Error:</strong> {item.error}
+                </div>
+              )}
             </Link>
           </li>
         ))}
