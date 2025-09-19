@@ -4,8 +4,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import styles from './Header.module.css';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
+  const { t } = useTranslation('common');
   const [isSticky, setIsSticky] = useState(false);
   const { data: session } = useSession();
   const isLoggedIn = !!session;
@@ -27,7 +30,7 @@ const Header = () => {
           {isLoggedIn ? (
             <>
               <Link href="/" className={styles.navLink}>
-                Main Page
+                {t('mainpage')}
               </Link>
               {' | '}
 
@@ -37,6 +40,7 @@ const Header = () => {
               >
                 Logout
               </button>
+              <LanguageSwitcher />
             </>
           ) : (
             <>

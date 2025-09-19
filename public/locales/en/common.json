@@ -1,5 +1,6 @@
 {
   "hello": "Hello",
   "welcome": "Welcome to our application",
-  "change_language": "Change Language"
+  "change_language": "Change Language",
+  "mainpage": "Main Page"
 }
