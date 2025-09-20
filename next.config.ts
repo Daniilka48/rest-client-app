@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Client-side i18n is configured in src/i18.ts
 };
 
 export default nextConfig;
