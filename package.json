@@ -9,7 +9,6 @@
     "lint": "eslint . --ext .js,.ts,.tsx",
     "format": "prettier --write \"**/*.{ts,tsx,js,css,json}\"",
     "format-fix": "prettier --write .",
-    "test": "jest --coverage",
     "prepare": "husky"
   },
   "dependencies": {
@@ -33,10 +32,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@testing-library/jest-dom": "^6.8.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/jest": "^30.0.0",
     "@types/next": "^8.0.7",
     "@types/node": "^20.19.14",
     "@types/postman-collection": "^3.5.11",

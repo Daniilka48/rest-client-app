@@ -56,5 +56,22 @@
       "userExists": "User already exists.",
       "missingFields": "All fields are required."
     }
+  },
+  "history": {
+    "title": "Request History",
+    "requestsCount": "{{count}} requests",
+    "emptyState": {
+      "title": "No requests yet",
+      "message": "You haven't executed any requests yet.",
+      "subtitle": "Get started by making your first API call:",
+      "linkText": "Try REST Client"
+    },
+    "labels": {
+      "endpoint": "Endpoint:",
+      "latency": "Latency:",
+      "request": "Request:",
+      "response": "Response:",
+      "error": "Error:"
+    }
   }
 }
