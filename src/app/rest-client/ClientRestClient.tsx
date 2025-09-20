@@ -14,7 +14,6 @@ interface Props {
 
 export default function ClientRestClient({ routeParams }: Props) {
   const { data: session } = useSession();
-  console.log(session);
 
   const [method, setMethod] = useState('GET');
   const [url, setUrl] = useState('');

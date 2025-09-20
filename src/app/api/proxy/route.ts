@@ -5,7 +5,6 @@ export async function POST(req: Request) {
   try {
     const userId = req.headers.get('x-user-id');
 
-    console.log('User ID:', userId);
     const payload = await req.json();
     const { method, url, headers = {}, body } = payload;
 
@@ -60,8 +59,7 @@ export async function POST(req: Request) {
 
     try {
       if (userId) {
-        console.log(payload, userId);
-        const { data, error } = await supabase.from('rest').insert([
+        await supabase.from('rest').insert([
           {
             user_id: userId,
             method,
@@ -75,8 +73,6 @@ export async function POST(req: Request) {
             error: errorMsg,
           },
         ]);
-        if (error) console.log('Error', error);
-        console.log(data);
       }
     } catch (dbErr) {
       console.error('Failed to save request history', dbErr);
