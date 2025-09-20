@@ -3,14 +3,20 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import styles from './Header.module.css';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
 
 const Header = () => {
+  const { t, ready } = useTranslation('common');
   const [isSticky, setIsSticky] = useState(false);
-  const { data: session } = useSession();
+  const [isMounted, setIsMounted] = useState(false);
+  const { data: session, status } = useSession();
   const isLoggedIn = !!session;
 
   useEffect(() => {
+    setIsMounted(true);
     const handleScroll = () => {
       setIsSticky(window.scrollY > 50);
     };
@@ -18,38 +24,82 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  if (!isMounted || status === 'loading' || !ready) {
+    return (
+      <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
+        <div className={styles.headerContent}>
+          <Link href="/" className={styles.logoLink}>
+            <h1 className={styles.logo}>REST Client</h1>
+          </Link>
+          <nav className={styles.navigation}>
+            <div className={styles.authLinks}>
+              <Link href="/auth/login" className={styles.authButton}>
+                Sign In
+              </Link>
+              <Link
+                href="/signup"
+                className={`${styles.authButton} ${styles.signUpButton}`}
+              >
+                Sign Up
+              </Link>
+            </div>
+            <LanguageSwitcher />
+          </nav>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles.headerContent}>
-        <h1 className={styles.logo}>REST Client</h1>
-
-        <nav>
+        <Link href="/" className={styles.logoLink}>
+          <h1 className={styles.logo}>REST Client</h1>
+        </Link>
+        <nav className={styles.navigation}>
           {isLoggedIn ? (
             <>
-              <Link href="/" className={styles.navLink}>
-                Main Page
-              </Link>
-              {' | '}
-              <Link href="/rest-client" className={styles.navLink}>
-                REST Client
-              </Link>
-
-              <button
-                onClick={() => signOut({ callbackUrl: '/' })}
-                className={styles.navLink}
-              >
-                Logout
-              </button>
+              <div className={styles.mainNavLinks}>
+                <Link href="/" className={styles.navLink}>
+                  {t('navigation.mainPage')}
+                </Link>
+                <Link href="/rest-client" className={styles.navLink}>
+                  {t('navigation.restClient')}
+                </Link>
+                <Link href="/variables" className={styles.navLink}>
+                  Variables
+                </Link>
+              </div>
+              <div className={styles.userActions}>
+                <LanguageSwitcher />
+                <button
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                  className={styles.logoutButton}
+                  title={t('navigation.logout')}
+                >
+                  <span className={styles.logoutIcon}>
+                    <RiLogoutCircleRLine />
+                  </span>
+                  <span className={styles.logoutText}>
+                    {t('navigation.logout')}
+                  </span>
+                </button>
+              </div>
             </>
           ) : (
             <>
-              <Link href="/auth/login" className={styles.navLink}>
-                Sign In
-              </Link>
-              {' | '}
-              <Link href="/signup" className={styles.navLink}>
-                Sign Up
-              </Link>
+              <div className={styles.authLinks}>
+                <Link href="/auth/login" className={styles.authButton}>
+                  {t('navigation.signIn')}
+                </Link>
+                <Link
+                  href="/signup"
+                  className={`${styles.authButton} ${styles.signUpButton}`}
+                >
+                  {t('navigation.signUp')}
+                </Link>
+              </div>
+              <LanguageSwitcher />
             </>
           )}
         </nav>

@@ -5,8 +5,12 @@ import styles from './MainPage.module.css';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
+import '../i18';
 export default function MainPageMock() {
+  const { t, ready } = useTranslation('common');
+
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -16,35 +20,45 @@ export default function MainPageMock() {
     }
   }, [router, status]);
 
-  if (status === 'loading') {
+  if (status === 'loading' || !ready) {
     return <p>Loading...</p>;
   }
 
   return (
     <div>
       <main className={styles.main}>
-        <h2 className={styles.title}>Welcome to the REST Client App</h2>
-        <p className={styles.info}>Project: REST Client</p>
-        <p className={styles.info}>Course: Stage 3 React</p>
-
+        <h2 className={styles.title}>{t('welcomeMessage')}</h2>
+        <p className={styles.info}>{t('projectName')}</p>
+        <p className={styles.info}>{t('courseInfo')}</p>
         <p className={styles.welcome}>
-          Welcome Back, {session?.user?.name || 'User'}!
+          {t('greeting')} {session?.user?.name || 'User'}!
         </p>
 
-        <h2 className={styles.subtitle}>Developers</h2>
+        <div className={styles.navigationLinks}>
+          <Link href="/rest-client" className={styles.navCard}>
+            <h3>REST Client</h3>
+            <p>Create and send HTTP requests</p>
+          </Link>
+          <Link href="/variables" className={styles.navCard}>
+            <h3>Variables</h3>
+            <p>Manage environment and global variables</p>
+          </Link>
+        </div>
+
+        <h2 className={styles.subtitle}>{t('developersTitle')}</h2>
         <section className={styles.developers}>
           <DeveloperCard
             photo="/2.jpg"
-            name="Daniil Terekhin"
-            role="Frontend Developer"
-            bio="Graduate of Lipetsk State Technical University, majoring in Economics and Management at Enterprises."
+            name={t('developers.daniilTerekhin.name')}
+            role={t('developers.daniilTerekhin.role')}
+            bio={t('developers.daniilTerekhin.bio')}
             github="https://github.com/daniilka48"
           />
           <DeveloperCard
             photo="/1.jpeg"
-            name="Second Developer"
-            role="Frontend Developer"
-            bio="Graduate of Lipetsk State Technical University, majoring in Economics and Management at Enterprises."
+            name={t('developers.guliaIsaeva.name')}
+            role={t('developers.guliaIsaeva.role')}
+            bio={t('developers.guliaIsaeva.bio')}
             github="https://github.com/guliaisaeva"
           />
         </section>

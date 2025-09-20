@@ -1,0 +1,59 @@
+.langBox {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.languageButton {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.languageButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.languageButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.activeLanguage {
+  background: linear-gradient(135deg, #28a745, #34ce57);
+  border-color: #28a745;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.activeLanguage:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+  border-color: #1e7e34;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+@media (max-width: 768px) {
+  .langBox {
+    gap: 0.125rem;
+  }
+
+  .languageButton {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    min-width: 2rem;
+  }
+}
