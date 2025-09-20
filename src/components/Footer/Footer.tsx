@@ -21,7 +21,7 @@ export default function Footer() {
             target="_blank"
             className={styles.link}
           >
-            Second Developer
+            Gulia Isaeva Çöloğlu
           </Link>
         </p>
 
