@@ -74,8 +74,9 @@ export async function POST(req: Request) {
           },
         ]);
       }
-    } catch (dbErr) {
-      console.error('Failed to save request history', dbErr);
+    } catch {
+      // Don't let history saving failure break the main request
+      // Just skip history saving if it fails
     }
 
     return new NextResponse(responseText, {

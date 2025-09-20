@@ -9,10 +9,16 @@ import styles from './RestClient.module.css';
 type HeaderItem = { key: string; value: string };
 
 interface Props {
-  routeParams: string[];
+  routeParams?: string[];
+  initialData?: {
+    method: string;
+    url: string;
+    body: string;
+    headers: HeaderItem[];
+  };
 }
 
-export default function ClientRestClient({ routeParams }: Props) {
+export default function ClientRestClient({ routeParams, initialData }: Props) {
   const { data: session } = useSession();
 
   const [method, setMethod] = useState('GET');
@@ -30,12 +36,22 @@ export default function ClientRestClient({ routeParams }: Props) {
   const { resolveVariables } = useVariables();
 
   useEffect(() => {
-    if (!routeParams.length) return;
+    // Priority 1: Use initialData if provided (from history restoration)
+    if (initialData) {
+      setMethod(initialData.method);
+      setUrl(initialData.url);
+      setBody(initialData.body);
+      setHeaders(initialData.headers);
+      return;
+    }
+
+    // Priority 2: Use routeParams if provided (from URL navigation)
+    if (!routeParams?.length) return;
     const [m, urlB64, bodyB64] = routeParams;
     if (m) setMethod(m.toUpperCase());
     if (urlB64) setUrl(decodeBase64Unicode(urlB64));
     if (bodyB64) setBody(decodeBase64Unicode(bodyB64));
-  }, [routeParams]);
+  }, [routeParams, initialData]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);

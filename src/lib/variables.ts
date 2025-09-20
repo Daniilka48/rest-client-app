@@ -37,7 +37,7 @@ export class VariableManager {
         };
       }
     } catch (error) {
-      console.error('Error loading variables:', error);
+      throw new Error(`Failed to load variables: ${error}`);
     }
 
     return {
@@ -58,7 +58,7 @@ export class VariableManager {
       };
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
-      console.error('Error saving variables:', error);
+      throw new Error(`Failed to save variables: ${error}`);
     }
   }
 
@@ -70,7 +70,7 @@ export class VariableManager {
         localStorage.removeItem(this.ACTIVE_ENV_KEY);
       }
     } catch (error) {
-      console.error('Error setting active environment:', error);
+      throw new Error(`Failed to set active environment: ${error}`);
     }
   }
 

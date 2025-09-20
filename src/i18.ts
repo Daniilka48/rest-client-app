@@ -13,9 +13,12 @@ i18n
     supportedLngs: ['en', 'ru'],
     ns: ['common'],
     defaultNS: 'common',
-    debug: process.env.NODE_ENV === 'development',
+    debug: false, // Disable debug to reduce console noise
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json',
+      loadPath: '/api/locales/{{lng}}/{{ns}}',
+      requestOptions: {
+        cache: 'default',
+      },
     },
     interpolation: {
       escapeValue: false,
@@ -25,11 +28,13 @@ i18n
       caches: ['localStorage', 'sessionStorage'],
       lookupLocalStorage: 'i18nextLng',
       lookupSessionStorage: 'i18nextLng',
-      checkWhitelist: true,
     },
     react: {
       useSuspense: false,
     },
+    // Add this to handle loading failures more gracefully
+    saveMissing: false,
+    load: 'languageOnly',
   });
 
 export default i18n;

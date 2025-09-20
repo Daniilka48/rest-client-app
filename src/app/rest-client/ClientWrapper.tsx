@@ -7,9 +7,9 @@ const RestClientClient = dynamic(() => import('./ClientRestClient'), {
 });
 
 interface Props {
-  routeParams: string[];
+  routeParams?: string[];
 }
 
 export default function ClientWrapper({ routeParams }: Props) {
-  return <RestClientClient routeParams={routeParams} />;
+  return <RestClientClient routeParams={routeParams || []} />;
 }

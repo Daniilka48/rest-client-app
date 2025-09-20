@@ -1,8 +1,7 @@
 import type { DefaultSession } from 'next-auth';
-console.log(DefaultSession);
 
 declare module 'next-auth' {
-  interface Session {
+  interface Session extends DefaultSession {
     user: {
       id: string;
       name?: string | null;

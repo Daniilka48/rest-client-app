@@ -34,7 +34,6 @@ const Login = () => {
     }
   }, [status, router]);
 
-  // Show loading while checking session or translations not ready
   if (!isMounted || status === 'loading' || !ready) {
     return (
       <div className="signup-container form-wrapper">
