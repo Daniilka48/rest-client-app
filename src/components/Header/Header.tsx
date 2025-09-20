@@ -6,6 +6,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import styles from './Header.module.css';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
 
 const Header = () => {
   const { t, ready } = useTranslation('common');
@@ -76,7 +77,9 @@ const Header = () => {
                   className={styles.logoutButton}
                   title={t('navigation.logout')}
                 >
-                  <span className={styles.logoutIcon}>⏻</span>
+                  <span className={styles.logoutIcon}>
+                    <RiLogoutCircleRLine />
+                  </span>
                   <span className={styles.logoutText}>
                     {t('navigation.logout')}
                   </span>
