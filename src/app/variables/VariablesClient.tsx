@@ -88,7 +88,7 @@ export default function VariablesPage() {
 
         <input
           type="text"
-          placeholder="Environment name"
+          placeholder="Environment name:Testing"
           value={newEnvName}
           onChange={(e) => setNewEnvName(e.target.value)}
           className={styles.envNameInput}
@@ -113,7 +113,8 @@ export default function VariablesPage() {
 
         {globalVariables.length === 0 ? (
           <div className={styles.emptyState}>
-            No global variables. Click &quot;Add Variable&quot; to create one.
+            No global variables. Click &quot;Add Variable&quot; to create
+            one.After look at dropdow menu and select it.
           </div>
         ) : (
           <div className={styles.variableList}>
@@ -129,7 +130,7 @@ export default function VariablesPage() {
                 />
                 <input
                   type="text"
-                  placeholder="Variable name"
+                  placeholder="Variable name e.g., BASE_URL"
                   value={variable.key}
                   onChange={(e) =>
                     updateGlobalVariable(index, 'key', e.target.value)
@@ -138,7 +139,7 @@ export default function VariablesPage() {
                 />
                 <input
                   type="text"
-                  placeholder="Variable value"
+                  placeholder="Variable value: https://jsonplaceholder.typicode.com"
                   value={variable.value}
                   onChange={(e) =>
                     updateGlobalVariable(index, 'value', e.target.value)
@@ -238,7 +239,7 @@ export default function VariablesPage() {
                   />
                   <input
                     type="text"
-                    placeholder="Variable name"
+                    placeholder="Variable name:POST_ID"
                     value={variable.key}
                     onChange={(e) =>
                       updateEnvironmentVariable(
@@ -252,7 +253,7 @@ export default function VariablesPage() {
                   />
                   <input
                     type="text"
-                    placeholder="Variable value"
+                    placeholder="Variable value e.g. 1"
                     value={variable.value}
                     onChange={(e) =>
                       updateEnvironmentVariable(
@@ -330,7 +331,6 @@ export default function VariablesPage() {
             <p>Variables are resolved in:</p>
             <ul>
               <li>✅ Response section (real API data)</li>
-              <li>✅ Generated code section (actual URLs/values)</li>
               <li>✅ Browser URL (shareable links)</li>
             </ul>
           </div>
