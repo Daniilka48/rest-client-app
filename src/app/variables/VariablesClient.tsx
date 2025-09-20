@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useVariables } from '../../hooks/useVariables';
 import styles from './Variables.module.css';
+import Link from 'next/link';
 
 export default function VariablesPage() {
   const {
@@ -279,7 +280,11 @@ export default function VariablesPage() {
           )}
         </div>
       )}
-
+      <div className={styles.goToRestClient}>
+        <Link className={styles.navLink} href={'/rest-client'}>
+          Go to REST client page
+        </Link>
+      </div>
       <div className={styles.usage}>
         <div className={styles.usageTitle}>How to use variables:</div>
 
