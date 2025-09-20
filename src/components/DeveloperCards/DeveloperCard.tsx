@@ -7,6 +7,7 @@ type DeveloperCardProps = {
   role: string;
   bio?: string;
   github: string;
+  priority?: boolean;
 };
 
 export default function DeveloperCard({
@@ -15,6 +16,7 @@ export default function DeveloperCard({
   role,
   bio,
   github,
+  priority,
 }: DeveloperCardProps) {
   return (
     <div className={styles['about-card']}>
@@ -24,6 +26,7 @@ export default function DeveloperCard({
         width={150}
         height={150}
         className={styles['about-photo']}
+        priority={priority}
       />
       <h1 className={styles['about-title']}>{name}</h1>
       <h3 className={styles['about-subtitle']}>{role}</h3>

@@ -53,6 +53,7 @@ export default function MainPageMock() {
             role={t('developers.daniilTerekhin.role')}
             bio={t('developers.daniilTerekhin.bio')}
             github="https://github.com/daniilka48"
+            priority
           />
           <DeveloperCard
             photo="/1.jpeg"
