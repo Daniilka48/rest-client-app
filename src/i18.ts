@@ -9,7 +9,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'en', // ✅ valid
     supportedLngs: ['en', 'ru'],
     ns: ['common'],
     defaultNS: 'common',
@@ -25,7 +25,6 @@ i18n
       caches: ['localStorage', 'sessionStorage'],
       lookupLocalStorage: 'i18nextLng',
       lookupSessionStorage: 'i18nextLng',
-      checkWhitelist: true,
     },
     react: {
       useSuspense: false,

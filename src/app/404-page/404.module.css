@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.message {
+  font-size: 1.5rem;
+  color: #606060;
+  margin-bottom: 20px;
+}
+
+.link {
+  font-size: 1.2rem;
+  color: #0070f3;
+  text-decoration: underline;
+  cursor: pointer;
+}
