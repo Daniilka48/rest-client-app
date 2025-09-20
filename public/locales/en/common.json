@@ -54,5 +54,10 @@
       "userExists": "User already exists.",
       "missingFields": "All fields are required."
     }
+  },
+  "404": {
+    "title": "Page Not Found",
+    "message": "Sorry, the page you're looking for doesn't exist.",
+    "homeLink": "Go back to the homepage"
   }
 }
