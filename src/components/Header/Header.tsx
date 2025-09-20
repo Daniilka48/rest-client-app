@@ -23,7 +23,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Show loading state or default state until mounted and translations ready to avoid hydration mismatch
   if (!isMounted || status === 'loading' || !ready) {
     return (
       <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
@@ -65,6 +64,9 @@ const Header = () => {
                 </Link>
                 <Link href="/rest-client" className={styles.navLink}>
                   {t('navigation.restClient')}
+                </Link>
+                <Link href="/variables" className={styles.navLink}>
+                  Variables
                 </Link>
               </div>
               <div className={styles.userActions}>

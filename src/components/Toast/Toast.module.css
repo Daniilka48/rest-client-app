@@ -116,7 +116,6 @@
   }
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .toastContainer {
     top: 10px;

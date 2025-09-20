@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 import '../i18';
 export default function MainPageMock() {
   const { t, ready } = useTranslation('common');
@@ -32,6 +33,17 @@ export default function MainPageMock() {
         <p className={styles.welcome}>
           {t('greeting')} {session?.user?.name || 'User'}!
         </p>
+
+        <div className={styles.navigationLinks}>
+          <Link href="/rest-client" className={styles.navCard}>
+            <h3>REST Client</h3>
+            <p>Create and send HTTP requests</p>
+          </Link>
+          <Link href="/variables" className={styles.navCard}>
+            <h3>Variables</h3>
+            <p>Manage environment and global variables</p>
+          </Link>
+        </div>
 
         <h2 className={styles.subtitle}>{t('developersTitle')}</h2>
         <section className={styles.developers}>

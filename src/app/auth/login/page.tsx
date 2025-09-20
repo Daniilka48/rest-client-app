@@ -28,7 +28,6 @@ const Login = () => {
     setIsMounted(true);
   }, []);
 
-  // Redirect if already logged in
   useEffect(() => {
     if (status === 'authenticated') {
       router.push('/');
@@ -80,11 +79,9 @@ const Login = () => {
       });
 
       if (result?.error) {
-        // Check if the error indicates user doesn't exist
         if (
-          result.error.includes('User not found') ||
-          result.error.includes('not found') ||
-          result.error.includes('Please sign up')
+          result.error?.includes('User not found') ||
+          result.error?.includes('Invalid credentials')
         ) {
           setErrors({ general: result.error });
           showError(result.error);

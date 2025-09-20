@@ -44,7 +44,46 @@
   line-height: 1.6;
 }
 
-/* Responsive design */
+.navigationLinks {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.navCard {
+  display: block;
+  padding: 1.5rem;
+  background: var(--bg-color);
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.navCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+  border-color: #0056b3;
+}
+
+.navCard h3 {
+  margin: 0 0 0.5rem 0;
+  color: #007bff;
+  font-size: 1.2rem;
+}
+
+.navCard p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 768px) {
   .main {
     padding: 1.5rem 1rem;

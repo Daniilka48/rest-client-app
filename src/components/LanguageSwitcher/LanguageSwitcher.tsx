@@ -6,7 +6,7 @@ import styles from './LanguageSwitcher.module.css';
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const [currentLang, setCurrentLang] = useState('en'); // Default to 'en' to match SSR
+  const [currentLang, setCurrentLang] = useState('en');
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,6 @@ export default function LanguageSwitcher() {
     i18n.changeLanguage(lang);
   };
 
-  // Don't render active states until mounted to avoid hydration mismatch
   if (!isMounted) {
     return (
       <div className={styles.langBox}>
