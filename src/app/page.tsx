@@ -27,13 +27,16 @@ export default function MainPageMock() {
   return (
     <div>
       <main className={styles.main}>
-        <h2 className={styles.title}>{t('welcomeMessage')}</h2>
-        <p className={styles.info}>{t('projectName')}</p>
-        <p className={styles.info}>{t('courseInfo')}</p>
-        <p className={styles.welcome}>
-          {t('greeting')} {session?.user?.name || 'User'}!
+        <h2 className={styles.title}>
+          {t('welcomeMessage')},{' '}
+          <span style={{ color: 'red' }}>
+            {session?.user?.name || 'User'}!{' '}
+          </span>
+        </h2>
+        <p className={styles.info}>
+          <span>{t('projectName')}</span>
+          <span>{t('courseInfo')}</span>
         </p>
-
         <div className={styles.navigationLinks}>
           <Link href="/rest-client" className={styles.navCard}>
             <h3>REST Client</h3>
