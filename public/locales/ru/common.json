@@ -22,7 +22,9 @@
     "restClient": "REST Клиент",
     "logout": "Выйти",
     "signIn": "Вход",
-    "signUp": "Регистрация"
+    "signUp": "Регистрация",
+    "variables": "Переменные",
+    "history": "История"
   },
   "login": {
     "title": "Вход",

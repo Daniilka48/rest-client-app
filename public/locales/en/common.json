@@ -22,7 +22,9 @@
     "restClient": "REST Client",
     "logout": "Logout",
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "variables": "Variables",
+    "history": "History"
   },
   "login": {
     "title": "Login",

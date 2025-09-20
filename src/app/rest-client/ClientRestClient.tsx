@@ -6,7 +6,6 @@ import { useSession } from 'next-auth/react';
 import { useVariables } from '../../hooks/useVariables';
 import styles from './RestClient.module.css';
 
-
 type HeaderItem = { key: string; value: string };
 
 interface Props {

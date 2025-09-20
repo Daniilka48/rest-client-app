@@ -67,7 +67,10 @@ const Header = () => {
                   {t('navigation.restClient')}
                 </Link>
                 <Link href="/variables" className={styles.navLink}>
-                  Variables
+                  {t('navigation.variables')}
+                </Link>
+                <Link href="/history" className={styles.navLink}>
+                  {t('navigation.history')}
                 </Link>
               </div>
               <div className={styles.userActions}>
