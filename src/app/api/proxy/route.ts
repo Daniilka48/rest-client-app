@@ -74,10 +74,7 @@ export async function POST(req: Request) {
           },
         ]);
       }
-    } catch {
-      // Don't let history saving failure break the main request
-      // Just skip history saving if it fails
-    }
+    } catch {}
 
     return new NextResponse(responseText, {
       status: statusCode,

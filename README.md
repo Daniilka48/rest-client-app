@@ -14,14 +14,19 @@ A modern, full-stack REST API client built with Next.js, featuring authenticatio
    npm install
    ```
 
-2. **Create `.env.local` file in the root directory:**
+2. **Create `.env.local` and `.env` file in the root directory:**
 
-   ```env
-   NEXTAUTH_URL=http://localhost:3000
-   NEXTAUTH_SECRET=nX1lm3FU7lKlrmn5eKn/uOaavLwB7rQOL866tTfqMcI=
-   DATABASE_URL="file:./dev.db"
+   env.local:
+   ```
    NEXT_PUBLIC_SUPABASE_URL=https://brjjybqngljiagmfukfa.supabase.co
+   SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyamp5YnFuZ2xqaWFnbWZ1a2ZhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODMxMDI2NywiZXhwIjoyMDczODg2MjY3fQ.H3YplYr4eKq3eI4ZalQsEusqJ8n5ej1togIdqspaQ28
    NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyamp5YnFuZ2xqaWFnbWZ1a2ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzMTAyNjcsImV4cCI6MjA3Mzg4NjI2N30.vDkS5TUOO9V_y9pjMySKx74orts5WPt6w5ecOxQjnBU
+   ```
+   env:
+   ```
+   DATABASE_URL="file:./dev.db"
+   NEXTAUTH_SECRET=nX1lm3FU7lKlrmn5eKn/uOaavLwB7rQOL866tTfqMcI=
+   NEXTAUTH_URL=http://localhost:3000
    ```
 
 3. **Run the app:**
@@ -84,20 +89,20 @@ npm install
 
 Create environment files for your local development:
 
-#### Create `.env.local` file:
+**Create `.env.local` and `.env` file in the root directory:**
 
-```env
-# NextAuth Configuration
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=nX1lm3FU7lKlrmn5eKn/uOaavLwB7rQOL866tTfqMcI=
-
-# Database Configuration
-DATABASE_URL="file:./dev.db"
-
-# Supabase Configuration (for request history)
-NEXT_PUBLIC_SUPABASE_URL=https://brjjybqngljiagmfukfa.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyamp5YnFuZ2xqaWFnbWZ1a2ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzMTAyNjcsImV4cCI6MjA3Mzg4NjI2N30.vDkS5TUOO9V_y9pjMySKx74orts5WPt6w5ecOxQjnBU
-```
+   env.local:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://brjjybqngljiagmfukfa.supabase.co
+   SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyamp5YnFuZ2xqaWFnbWZ1a2ZhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODMxMDI2NywiZXhwIjoyMDczODg2MjY3fQ.H3YplYr4eKq3eI4ZalQsEusqJ8n5ej1togIdqspaQ28
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyamp5YnFuZ2xqaWFnbWZ1a2ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgzMTAyNjcsImV4cCI6MjA3Mzg4NjI2N30.vDkS5TUOO9V_y9pjMySKx74orts5WPt6w5ecOxQjnBU
+   ```
+   env:
+   ```
+   DATABASE_URL="file:./dev.db"
+   NEXTAUTH_SECRET=nX1lm3FU7lKlrmn5eKn/uOaavLwB7rQOL866tTfqMcI=
+   NEXTAUTH_URL=http://localhost:3000
+   ```
 
 **📝 Note**: These are the working keys for the demo environment. You can use them directly for testing.
 

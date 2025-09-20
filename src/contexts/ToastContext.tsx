@@ -9,7 +9,7 @@ export interface Toast {
   duration?: number;
 }
 
-interface ToastContextType {
+export interface ToastContextType {
   toasts: Toast[];
   addToast: (message: string, type?: Toast['type'], duration?: number) => void;
   removeToast: (id: string) => void;

@@ -77,7 +77,6 @@ export default function HistoryRestorePage({ params }: Props) {
     );
   }
 
-  // Convert headers object to array format expected by ClientRestClient
   const headersArray = Object.entries(requestData.headers || {}).map(
     ([key, value]) => ({ key, value })
   );

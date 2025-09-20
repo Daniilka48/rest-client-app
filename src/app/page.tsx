@@ -56,7 +56,6 @@ export default function MainPageMock() {
     );
   }
 
-  // Original authenticated layout
   return (
     <div>
       <main className={styles.main}>
