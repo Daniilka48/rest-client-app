@@ -5,14 +5,16 @@ import Link from 'next/link';
 import styles from './404-page/404.module.css';
 
 const Custom404: FC = () => {
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation('common');
+
+  if (!ready) return <p>Loading translations...</p>;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{t('404.title')}</h1>
-      <p className={styles.message}>{t('404.message')}</p>
+      <h1 className={styles.title}>{t('notfound.title')}</h1>
+      <p className={styles.message}>{t('notfound.message')}</p>
       <Link className={styles.link} href="/">
-        {t('404.homeLink')}
+        {t('notfound.homeLink')}
       </Link>
     </div>
   );
