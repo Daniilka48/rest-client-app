@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { decodeBase64Unicode, encodeBase64Unicode } from '@/lib/base64';
 import { generateCodeSnippets } from '@/lib/codegen';
+import styles from './RestClient.module.css';
 
 type HeaderItem = { key: string; value: string };
 
@@ -108,141 +109,128 @@ export default function ClientRestClient({ routeParams }: Props) {
   };
 
   return (
-    <div style={{ padding: 16, maxWidth: 1000, margin: '0 auto' }}>
-      <div
-        style={{
-          display: 'flex',
-          gap: 8,
-          alignItems: 'center',
-          marginBottom: 12,
-        }}
-      >
-        <select
-          value={method}
-          onChange={(e) => setMethod(e.target.value)}
-          style={{ minWidth: 100 }}
-        >
-          {['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'].map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
-        </select>
-        <input
-          placeholder="https://api.example.com/resource"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          style={{ flex: 1, padding: 8 }}
-        />
-        <button
-          onClick={sendRequest}
-          disabled={loading}
-          style={{ padding: '8px 12px' }}
-        >
-          {loading ? 'Sending...' : 'Send'}
-        </button>
+    <div className={styles.container}>
+      <h1 className={styles.title}>REST Client</h1>
+
+      <div className={styles.requestSection}>
+        <div className={styles.requestRow}>
+          <select
+            value={method}
+            onChange={(e) => setMethod(e.target.value)}
+            className={styles.methodSelect}
+          >
+            {['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'].map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
+          <input
+            placeholder="https://api.example.com/resource"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            className={styles.urlInput}
+          />
+          <button
+            onClick={sendRequest}
+            disabled={loading}
+            className={styles.sendButton}
+          >
+            {loading ? 'Sending...' : 'Send'}
+          </button>
+        </div>
       </div>
 
-      <div style={{ marginBottom: 12 }}>
-        <strong>Headers</strong>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 8,
-            marginTop: 8,
-          }}
-        >
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>Headers</div>
+        <div className={styles.headersContainer}>
           {headers.map((h, i) => (
-            <div key={i} style={{ display: 'flex', gap: 8 }}>
+            <div key={i} className={styles.headerRow}>
               <input
                 placeholder="Key"
                 value={h.key}
                 onChange={(e) => updateHeader(i, e.target.value, h.value)}
-                style={{ width: 160, padding: 6 }}
+                className={`${styles.headerInput} ${styles.headerKeyInput}`}
               />
               <input
                 placeholder="Value"
                 value={h.value}
                 onChange={(e) => updateHeader(i, h.key, e.target.value)}
-                style={{ flex: 1, padding: 6 }}
+                className={`${styles.headerInput} ${styles.headerValueInput}`}
               />
-              <button onClick={() => removeHeader(i)}>Remove</button>
+              <button
+                onClick={() => removeHeader(i)}
+                className={styles.removeButton}
+              >
+                Remove
+              </button>
             </div>
           ))}
-          <button onClick={addHeader} style={{ marginTop: 8 }}>
+          <button onClick={addHeader} className={styles.addButton}>
             + Add Header
           </button>
         </div>
       </div>
 
-      <div style={{ marginBottom: 12 }}>
-        <strong>Body</strong>
-        <div>
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            rows={8}
-            style={{ width: '100%', padding: 8 }}
-          />
-          <div style={{ marginTop: 8 }}>
-            <button onClick={prettifyBody}>Prettify</button>
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>Body</div>
+        <textarea
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          rows={8}
+          className={styles.bodyTextarea}
+          placeholder="Enter request body (JSON, XML, plain text, etc.)"
+        />
+        <button onClick={prettifyBody} className={styles.prettifyButton}>
+          Prettify JSON
+        </button>
+      </div>
+
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>Response</div>
+        <div className={styles.responseContainer}>
+          {error && <div className={styles.errorText}>{error}</div>}
+          {responseStatus !== null && (
+            <div
+              className={`${styles.statusText} ${
+                responseStatus >= 200 && responseStatus < 300
+                  ? styles.statusSuccess
+                  : responseStatus >= 400
+                    ? styles.statusError
+                    : styles.statusOther
+              }`}
+            >
+              Status: {responseStatus}
+            </div>
+          )}
+          <div className={styles.responseText}>
+            {responseText ?? 'No response yet'}
           </div>
         </div>
       </div>
 
-      <div style={{ marginTop: 18 }}>
-        <strong>Response</strong>
-        <div
-          style={{
-            marginTop: 8,
-            border: '1px solid #ddd',
-            borderRadius: 6,
-            padding: 12,
-          }}
-        >
-          {error && <div style={{ color: 'red' }}>{error}</div>}
-          {responseStatus !== null && <div>Status: {responseStatus}</div>}
-          <pre style={{ whiteSpace: 'pre-wrap', marginTop: 8 }}>
-            {responseText ?? 'No response yet'}
-          </pre>
-        </div>
-      </div>
-
-      <div style={{ marginTop: 18 }}>
-        <strong>Generated Code</strong>
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>Generated Code</div>
         {!url ? (
-          <div style={{ marginTop: 8, color: 'red' }}>
-            Not enough details to generate code
+          <div className={styles.noCodeMessage}>
+            Enter a URL to generate code snippets
           </div>
         ) : (
           <>
-            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+            <div className={styles.tabContainer}>
               {Object.keys(snippets).map((key) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  style={{
-                    padding: '6px 12px',
-                    borderRadius: 6,
-                    background: activeTab === key ? '#ddd' : '#f7f7f7',
-                  }}
+                  className={`${styles.tab} ${activeTab === key ? styles.tabActive : ''}`}
                 >
                   {key}
                 </button>
               ))}
             </div>
-            <pre
-              style={{
-                whiteSpace: 'pre-wrap',
-                marginTop: 8,
-                background: '#f7f7f7',
-                padding: 12,
-                borderRadius: 6,
-              }}
-            >
+            <div className={styles.codeBlock}>
               {snippets[activeTab] || 'Generating...'}
-            </pre>
+            </div>
           </>
         )}
       </div>

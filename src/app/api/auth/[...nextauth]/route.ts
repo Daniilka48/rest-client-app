@@ -56,6 +56,7 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/login',
     error: '/auth/error',
     signOut: '/auth/logout',
+    newUser: '/signup',
   },
 
   session: {

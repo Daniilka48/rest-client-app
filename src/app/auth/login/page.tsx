@@ -28,14 +28,12 @@ const Login = () => {
     setIsMounted(true);
   }, []);
 
-  // Redirect if already logged in
   useEffect(() => {
     if (status === 'authenticated') {
       router.push('/');
     }
   }, [status, router]);
 
-  // Show loading while checking session or translations not ready
   if (!isMounted || status === 'loading' || !ready) {
     return (
       <div className="signup-container form-wrapper">
@@ -80,17 +78,15 @@ const Login = () => {
       });
 
       if (result?.error) {
-        // Check if the error indicates user doesn't exist
         if (
-          result.error.includes('User not found') ||
-          result.error.includes('not found') ||
-          result.error.includes('Please sign up')
+          result.error?.includes('User not found') ||
+          result.error?.includes('Invalid credentials')
         ) {
           setErrors({ general: result.error });
           showError(result.error);
           showSuccess(t('login.redirectMessage'));
           setTimeout(() => {
-            router.push('/signup');
+            router.replace('/signup');
           }, 2000);
         } else {
           setErrors({ general: result.error });

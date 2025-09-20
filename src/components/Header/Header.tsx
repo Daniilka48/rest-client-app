@@ -23,7 +23,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Show loading state or default state until mounted and translations ready to avoid hydration mismatch
   if (!isMounted || status === 'loading' || !ready) {
     return (
       <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
@@ -74,7 +73,7 @@ const Header = () => {
                   className={styles.logoutButton}
                   title={t('navigation.logout')}
                 >
-                  <span className={styles.logoutIcon}>⏻</span>
+                  <span className={styles.logoutIcon}>🚪</span>
                   <span className={styles.logoutText}>
                     {t('navigation.logout')}
                   </span>

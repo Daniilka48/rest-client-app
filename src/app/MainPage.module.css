@@ -44,7 +44,6 @@
   line-height: 1.6;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .main {
     padding: 1.5rem 1rem;
