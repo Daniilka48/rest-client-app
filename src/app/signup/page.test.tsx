@@ -6,7 +6,7 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import SignUp, { getErrorMessage } from './page';
+import SignUp from './page';
 import { useToast, ToastContextType } from '@/contexts/ToastContext';
 import { useRouter } from 'next/navigation';
 import { Session } from 'next-auth';
@@ -34,7 +34,6 @@ describe('SignUp', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.useFakeTimers();
-
     (useRouter as jest.Mock).mockReturnValue({ push: pushMock });
 
     const toastContext: ToastContextType = {
@@ -160,16 +159,5 @@ describe('SignUp', () => {
       expect(showErrorMock).toHaveBeenCalledWith('Failed');
       expect(screen.getByText('Failed')).toBeInTheDocument();
     });
-  });
-});
-
-describe('getErrorMessage', () => {
-  it('returns error.message if error is instance of Error', () => {
-    const error = new Error('Test error');
-    expect(getErrorMessage(error)).toBe('Test error');
-  });
-
-  it('returns default message if error is unknown', () => {
-    expect(getErrorMessage('oops')).toBe('Something went wrong.');
   });
 });
