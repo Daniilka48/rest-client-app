@@ -12,7 +12,7 @@ jest.mock('../ClientWrapper', () => {
 
 describe('RestClientDynamicPage', () => {
   it('renders ClientWrapper with empty array if no params provided', () => {
-    render(<RestClientDynamicPage params={{}} />);
+    render(<RestClientDynamicPage params={{ params: [] }} />);
     expect(screen.getByText('ClientWrapper Mock:')).toBeInTheDocument();
   });
 
