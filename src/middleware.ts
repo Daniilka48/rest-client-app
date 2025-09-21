@@ -30,11 +30,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: [
-    '/rest-client/:path*',
-    '/history/:path*',
-    '/variables/:path*',
-    // '/auth/:path*',
-    // '/signup',
-  ],
+  matcher: ['/rest-client/:path*', '/history/:path*', '/variables/:path*'],
 };
