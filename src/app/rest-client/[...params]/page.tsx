@@ -1,12 +1,15 @@
-'use client';
-
-import ClientWrapper from '../ClientWrapper';
-
 interface PageProps {
-  params?: { params?: string[] };
+  params: Promise<{ params: string[] }>;
 }
 
-export default function RestClientDynamicPage({ params }: PageProps) {
-  const routeParams = params?.params || [];
-  return <ClientWrapper routeParams={routeParams} />;
+export default async function Page({ params }: PageProps) {
+  const resolvedParams = await params;
+  const dynamicParams = resolvedParams.params;
+
+  return (
+    <div>
+      <h1>Dynamic Route Content</h1>
+      <p>Params: {dynamicParams.join('/')}</p>
+    </div>
+  );
 }
