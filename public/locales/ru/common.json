@@ -1,0 +1,77 @@
+{
+  "welcomeMessage": "Добро пожаловать в приложение REST Client",
+  "projectName": "Проект: REST Client",
+  "courseInfo": "Курс: Этап 3 React",
+  "greeting": "С возвращением,",
+  "developersTitle": "Разработчики",
+  "developers": {
+    "daniilTerekhin": {
+      "name": "Даниил Терехин",
+      "role": "Фронтенд разработчик",
+      "bio": "Выпускник Липецкого государственного технического университета, специализация — экономика и управление на предприятиях."
+    },
+    "guliaIsaeva": {
+      "name": "Гулия Исаева Çöloğlu",
+      "role": "Фронтенд разработчик",
+      "bio": "Выпускница Гамбургского университета, специализация — Performance Studies (Master of Art)"
+    }
+  },
+  "loading": "Загрузка...",
+  "navigation": {
+    "mainPage": "Главная страница",
+    "restClient": "REST Клиент",
+    "logout": "Выйти",
+    "signIn": "Вход",
+    "signUp": "Регистрация",
+    "variables": "Переменные",
+    "history": "История"
+  },
+  "login": {
+    "title": "Вход",
+    "emailPlaceholder": "Эл. почта",
+    "passwordPlaceholder": "Пароль",
+    "submitButton": "Войти",
+    "successMessage": "Вы успешно вошли!",
+    "redirectMessage": "Перенаправление на регистрацию...",
+    "noAccount": "Нет аккаунта?",
+    "error": {
+      "default": "Что-то пошло не так.",
+      "invalidCredentials": "Неверный адрес эл. почты или пароль.",
+      "userNotFound": "Пользователь не найден.",
+      "missingFields": "Все поля обязательны для заполнения."
+    }
+  },
+  "signup": {
+    "title": "Регистрация",
+    "namePlaceholder": "Имя",
+    "emailPlaceholder": "Эл. почта",
+    "passwordPlaceholder": "Пароль",
+    "submitButton": "Зарегистрироваться",
+    "successMessage": "Аккаунт успешно создан! Перенаправление на вход...",
+    "redirectMessage": "Перенаправление на вход...",
+    "hasAccount": "Уже есть аккаунт?",
+    "error": {
+      "default": "Что-то пошло не так.",
+      "registrationFailed": "Ошибка регистрации.",
+      "userExists": "Пользователь уже существует.",
+      "missingFields": "Все поля обязательны для заполнения."
+    }
+  },
+  "history": {
+    "title": "История запросов",
+    "requestsCount": "{{count}} запросов",
+    "emptyState": {
+      "title": "Запросов пока нет",
+      "message": "Вы еще не выполнили ни одного запроса.",
+      "subtitle": "Начните с первого API-вызова:",
+      "linkText": "Попробовать REST Клиент"
+    },
+    "labels": {
+      "endpoint": "Конечная точка:",
+      "latency": "Задержка:",
+      "request": "Запрос:",
+      "response": "Ответ:",
+      "error": "Ошибка:"
+    }
+  }
+}
