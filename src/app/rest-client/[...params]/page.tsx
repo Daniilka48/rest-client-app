@@ -1,9 +1,10 @@
 import ClientWrapper from '../ClientWrapper';
 
-interface Props {
-  params: { params?: string[] };
+interface PageProps {
+  params?: { params?: string[] };
 }
 
-export default function RestClientDynamicPage({ params }: Props) {
-  return <ClientWrapper routeParams={params?.params || []} />;
+export default async function RestClientDynamicPage({ params }: PageProps) {
+  const routeParams = params?.params || [];
+  return <ClientWrapper routeParams={routeParams} />;
 }
