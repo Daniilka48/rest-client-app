@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --ext .js,.ts,.tsx",
+    "format": "prettier --write \"**/*.{ts,tsx,js,css,json}\"",
+    "format-fix": "prettier --write .",
     "test": "jest",
-    "test:coverage": "jest --coverage --passWithNoTests"
+    "test:coverage": "jest --coverage --passWithNoTests",
+    "prepare": "husky"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
