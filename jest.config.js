@@ -19,8 +19,16 @@ const customJestConfig = {
     'src/**/*.{ts,tsx,js,jsx}',
     '!src/**/*.d.ts',
     '!src/**/index.{ts,tsx,js,jsx}',
+    '!src/generated/**',
+    '!src/app/api/**',
+    '!src/middleware.ts',
   ],
-  coveragePathIgnorePatterns: ['/node_modules/', '/.next/'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/.next/',
+    '/src/generated/',
+    '/src/app/api/',
+  ],
 };
 
 export default createJestConfig(customJestConfig);

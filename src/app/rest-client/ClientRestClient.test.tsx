@@ -4,20 +4,17 @@ import { useSession } from 'next-auth/react';
 import { useVariables } from '../../hooks/useVariables';
 import { generateCodeSnippets } from '@/lib/codegen';
 
-// моки
 jest.mock('next-auth/react');
 jest.mock('../../hooks/useVariables');
 jest.mock('@/lib/codegen', () => ({
   generateCodeSnippets: jest.fn(),
 }));
 
-// window.history mock
 const replaceStateMock = jest.fn();
 Object.defineProperty(window, 'history', {
   value: { replaceState: replaceStateMock },
 });
 
-// fetch mock
 global.fetch = jest.fn();
 
 describe('ClientRestClient', () => {

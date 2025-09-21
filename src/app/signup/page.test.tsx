@@ -120,7 +120,6 @@ describe('SignUp', () => {
       fireEvent.click(screen.getByText('signup.submitButton'));
     });
 
-    // Прокрутка таймеров, чтобы сработал setTimeout в компоненте
     act(() => {
       jest.runAllTimers();
     });

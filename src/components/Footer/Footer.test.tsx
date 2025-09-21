@@ -46,7 +46,6 @@ describe('Footer', () => {
       'https://rs.school/courses/reactjs'
     );
 
-    // Проверяем, что мок для Image отображается
     expect(screen.getByTestId('mock-image')).toHaveTextContent('RS School');
   });
 });
