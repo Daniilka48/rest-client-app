@@ -14,9 +14,9 @@ export default function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params?: Record<string, string | undefined>;
+  params: Record<string, string | undefined>;
 }) {
-  const locale = params?.locale ?? 'en';
+  const locale = params.locale ?? 'en';
 
   return (
     <html lang={locale}>
