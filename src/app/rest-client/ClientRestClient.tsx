@@ -8,7 +8,7 @@ import styles from './RestClient.module.css';
 
 type HeaderItem = { key: string; value: string };
 
-interface Props {
+export interface Props {
   routeParams?: string[];
   initialData?: {
     method: string;
@@ -36,7 +36,6 @@ export default function ClientRestClient({ routeParams, initialData }: Props) {
   const { resolveVariables } = useVariables();
 
   useEffect(() => {
-    // Priority 1: Use initialData if provided (from history restoration)
     if (initialData) {
       setMethod(initialData.method);
       setUrl(initialData.url);
@@ -45,7 +44,6 @@ export default function ClientRestClient({ routeParams, initialData }: Props) {
       return;
     }
 
-    // Priority 2: Use routeParams if provided (from URL navigation)
     if (!routeParams?.length) return;
     const [m, urlB64, bodyB64] = routeParams;
     if (m) setMethod(m.toUpperCase());
