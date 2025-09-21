@@ -12,10 +12,6 @@ import {
 } from '@/utils/validation';
 import { useToast } from '@/contexts/ToastContext';
 
-export function getErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : 'Something went wrong.';
-}
-
 const SignUp = () => {
   const { t, ready } = useTranslation('common');
   const { showSuccess, showError } = useToast();
@@ -34,6 +30,10 @@ const SignUp = () => {
   }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+
+  const getErrorMessage = (error: unknown): string => {
+    return error instanceof Error ? error.message : 'Something went wrong.';
+  };
 
   useEffect(() => {
     setIsMounted(true);
