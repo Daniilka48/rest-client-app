@@ -9,14 +9,15 @@ export const metadata: Metadata = {
   icons: { icon: '/fav.ico' },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Record<string, string | undefined>;
+  params: Promise<{ locale: string }>;
 }) {
-  const locale = params.locale ?? 'en';
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale ?? 'en';
 
   return (
     <html lang={locale}>
