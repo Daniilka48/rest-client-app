@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import ClientProviderWrapper from './ClientProviderWrapper';
 import type { Metadata } from 'next';
 import './globals.css';
@@ -13,11 +14,13 @@ export default function RootLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: { locale: string };
+  children: ReactNode;
+  params?: { locale?: string };
 }) {
+  const locale = params?.locale ?? 'en';
+
   return (
-    <html lang={params.locale || 'en'}>
+    <html lang={locale}>
       <body>
         <ClientProviderWrapper>{children}</ClientProviderWrapper>
       </body>
